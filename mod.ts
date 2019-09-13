@@ -1,6 +1,6 @@
 import {
-  chacha20poly1305Seal,
-  chacha20poly1305Open,
+  seal as chacha20poly1305Seal,
+  open as chacha20poly1305Open,
   NONCE_BYTES as CHACHA20_NONCE_BYTES
 } from "https://denopkg.com/chiefbiiko/chacha20-poly1305/mod.ts";
 import {
