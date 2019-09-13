@@ -2,8 +2,8 @@ import { test, runIfMain } from "https://deno.land/std/testing/mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { encode } from "https://denopkg.com/chiefbiiko/std-encoding/mod.ts";
 import {
-  xchacha20poly1305Seal,
-  xchacha20poly1305Open
+  seal,
+  open
 } from "./mod.ts";
 
 interface TestVector {
@@ -41,13 +41,13 @@ testVectors.forEach(
     i: number
   ): void => {
     test({
-      name: `xchacha20poly1305Seal [${i}]`,
+      name: `seal [${i}]`,
       fn(): void {
         const actual: {
           ciphertext: Uint8Array;
           tag: Uint8Array;
           aad: Uint8Array;
-        } = xchacha20poly1305Seal(key, nonce, plaintext, aad);
+        } = seal(key, nonce, plaintext, aad);
 
         assertEquals(actual.ciphertext, ciphertext);
         assertEquals(actual.tag, tag);
@@ -62,10 +62,10 @@ testVectors.forEach(
     i: number
   ): void => {
     test({
-      name: `xchacha20poly1305Open [${i}]`,
+      name: `open [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Open(key, nonce, ciphertext, aad, tag),
+          open(key, nonce, ciphertext, aad, tag),
           plaintext
         );
       }
@@ -79,7 +79,7 @@ testVectors.forEach(
       name: `xchacha20poly1305 nulls if not authenticated [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Open(
+          open(
             key,
             nonce,
             ciphertext,
@@ -96,10 +96,10 @@ testVectors.forEach(
 testVectors.forEach(
   ({ key, nonce, plaintext, aad }: TestVector, i: number): void => {
     test({
-      name: `xchacha20poly1305Seal nulls if the key length is invalid [${i}]`,
+      name: `seal nulls if the key length is invalid [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Seal(key.subarray(-9), nonce, plaintext, aad),
+          seal(key.subarray(-9), nonce, plaintext, aad),
           null
         );
       }
@@ -110,10 +110,10 @@ testVectors.forEach(
 testVectors.forEach(
   ({ key, nonce, plaintext, aad }: TestVector, i: number): void => {
     test({
-      name: `xchacha20poly1305Seal nulls if the nonce length is invalid [${i}]`,
+      name: `seal nulls if the nonce length is invalid [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Seal(key, nonce.subarray(-9), plaintext, aad),
+          seal(key, nonce.subarray(-9), plaintext, aad),
           null
         );
       }
@@ -124,10 +124,10 @@ testVectors.forEach(
 testVectors.forEach(
   ({ key, nonce, ciphertext, aad, tag }: TestVector, i: number): void => {
     test({
-      name: `xchacha20poly1305Open nulls if the key length is invalid [${i}]`,
+      name: `open nulls if the key length is invalid [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Open(key.subarray(-9), nonce, ciphertext, aad, tag),
+          open(key.subarray(-9), nonce, ciphertext, aad, tag),
           null
         );
       }
@@ -138,10 +138,10 @@ testVectors.forEach(
 testVectors.forEach(
   ({ key, nonce, ciphertext, aad, tag }: TestVector, i: number): void => {
     test({
-      name: `xchacha20poly1305Open nulls if the nonce length is invalid [${i}]`,
+      name: `open nulls if the nonce length is invalid [${i}]`,
       fn(): void {
         assertEquals(
-          xchacha20poly1305Open(key, nonce.subarray(-9), ciphertext, aad, tag),
+          open(key, nonce.subarray(-9), ciphertext, aad, tag),
           null
         );
       }
