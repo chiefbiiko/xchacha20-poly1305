@@ -1,8 +1,8 @@
 # xchacha20-poly1305
 
-XChaCha20-Poly1305 as defined by [the XChaCha20 IRTF CFRG draft](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01), and [IETF RFC 8439](https://tools.ietf.org/html/rfc8439).
+![ci](https://github.com/chiefbiiko/xchacha20-poly1305/workflows/ci/badge.svg)
 
-[![Travis](http://img.shields.io/travis/chiefbiiko/xchacha20-poly1305.svg?style=flat)](http://travis-ci.org/chiefbiiko/xchacha20-poly1305) [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/chiefbiiko/xchacha20-poly1305?branch=master&svg=true)](https://ci.appveyor.com/project/chiefbiiko/xchacha20-poly1305)
+XChaCha20-Poly1305 as defined by [the XChaCha20 IRTF CFRG draft](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01), and [IETF RFC 8439](https://tools.ietf.org/html/rfc8439)
 
 ## API
 
