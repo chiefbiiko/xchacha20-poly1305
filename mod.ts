@@ -85,6 +85,7 @@ export function open(
   }
 
   if (ciphertext.byteLength > CIPHERTEXT_BYTES_MAX) {
+    return null;
   }
 
   if (aad.byteLength > AAD_BYTES_MAX) {
