@@ -55,7 +55,7 @@ export function seal(
     4
   );
 
-  const sealed: {
+  const sealed: null | {
     ciphertext: Uint8Array;
     tag: Uint8Array;
     aad: Uint8Array;
@@ -117,7 +117,7 @@ export function open(
     4
   );
 
-  const plaintext: Uint8Array = chacha20poly1305Open(
+  const plaintext: null | Uint8Array = chacha20poly1305Open(
     chacha20poly1305Key,
     chacha20poly1305Nonce,
     ciphertext,
