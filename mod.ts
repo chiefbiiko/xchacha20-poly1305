@@ -1,13 +1,11 @@
 import {
-  seal as chacha20poly1305Seal,
-  open as chacha20poly1305Open,
-  NONCE_BYTES as CHACHA20_NONCE_BYTES
-} from "https://denopkg.com/chiefbiiko/chacha20-poly1305/mod.ts";
-import {
-  hchacha20,
-  NONCE_BYTES as HCHACHA20_NONCE_BYTES,
-  OUTPUT_BYTES as HCHACHA20_OUTPUT_BYTES
-} from "https://denopkg.com/chiefbiiko/hchacha20/mod.ts";
+  CHACHA20_NONCE_BYTES,
+  chacha20poly1305Seal,
+  chacha20poly1305Open,
+  HCHACHA20_NONCE_BYTES,
+  HCHACHA20_OUTPUT_BYTES,
+  hchacha20
+} from "./deps.ts";
 
 export const KEY_BYTES: number = 32;
 export const NONCE_BYTES: number = 24;
@@ -21,7 +19,7 @@ export function seal(
   nonce: Uint8Array,
   plaintext: Uint8Array,
   aad: Uint8Array
-): { ciphertext: Uint8Array; tag: Uint8Array; aad: Uint8Array } {
+): null | { ciphertext: Uint8Array; tag: Uint8Array; aad: Uint8Array; } {
   if (key.byteLength !== KEY_BYTES) {
     return null;
   }
@@ -42,7 +40,11 @@ export function seal(
     HCHACHA20_OUTPUT_BYTES
   );
 
-  hchacha20(chacha20poly1305Key, key, nonce.subarray(0, HCHACHA20_NONCE_BYTES));
+  hchacha20(
+    chacha20poly1305Key,
+    key,
+    nonce.subarray(0, HCHACHA20_NONCE_BYTES)
+  );
 
   const chacha20poly1305Nonce: Uint8Array = new Uint8Array(
     CHACHA20_NONCE_BYTES
@@ -75,7 +77,7 @@ export function open(
   ciphertext: Uint8Array,
   aad: Uint8Array,
   receivedTag: Uint8Array
-): Uint8Array {
+): null | Uint8Array {
   if (key.byteLength !== KEY_BYTES) {
     return null;
   }
@@ -100,7 +102,11 @@ export function open(
     HCHACHA20_OUTPUT_BYTES
   );
 
-  hchacha20(chacha20poly1305Key, key, nonce.subarray(0, HCHACHA20_NONCE_BYTES));
+  hchacha20(
+    chacha20poly1305Key,
+    key,
+    nonce.subarray(0, HCHACHA20_NONCE_BYTES)
+  );
 
   const chacha20poly1305Nonce: Uint8Array = new Uint8Array(
     CHACHA20_NONCE_BYTES
