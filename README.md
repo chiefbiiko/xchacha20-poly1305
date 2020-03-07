@@ -2,7 +2,7 @@
 
 ![ci](https://github.com/chiefbiiko/xchacha20-poly1305/workflows/ci/badge.svg)
 
-XChaCha20-Poly1305 as defined by [the XChaCha20 IRTF CFRG draft](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-01), and [IETF RFC 8439](https://tools.ietf.org/html/rfc8439)
+XChaCha20-Poly1305 as defined by [XChaCha20 IRTF CFRG draft 03](https://tools.ietf.org/html/draft-irtf-cfrg-xchacha-03), and [IETF RFC 8439](https://tools.ietf.org/html/rfc8439)
 
 ## API
 

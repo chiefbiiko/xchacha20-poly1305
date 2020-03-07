@@ -48,8 +48,8 @@ testVectors.forEach(
           aad: Uint8Array;
         } = seal(key, nonce, plaintext, aad);
 
-        assertEquals(actual!.ciphertext, ciphertext);
-        assertEquals(actual!.tag, tag);
+        assertEquals(actual?.ciphertext, ciphertext);
+        assertEquals(actual?.tag, tag);
       }
     });
   }
@@ -75,7 +75,7 @@ testVectors.forEach(
 testVectors.forEach(
   ({ key, nonce, aad, ciphertext }: TestVector, i: number): void => {
     Deno.test({
-      name: `xchacha20poly1305 nulls if not authenticated [${i}]`,
+      name: `open nulls if not authenticated [${i}]`,
       fn(): void {
         assertEquals(
           open(
